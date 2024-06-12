@@ -1,11 +1,25 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
+import os
+
+# Resolve the current directory
+current_dir = Path(__file__).resolve().parent
+
+# Print current working directory for debugging
+st.write(f"Current working directory: {os.getcwd()}")
+
+# Define the path to the CSS file
+css_path = current_dir / 'design' / 'style.css'
 
 # Load CSS from file
 def load_css(file_path):
-    with open(file_path, "r") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    if file_path.is_file():
+        with open(file_path, "r") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    else:
+        st.error(f"CSS file not found: {file_path}")
 
 # Sample sales data
 data = {
@@ -16,7 +30,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Inject CSS
-load_css("design\styles.css")
+load_css(css_path)
 
 # Streamlit app
 st.title('Sales Dashboard')
