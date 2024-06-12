@@ -27,9 +27,6 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Inject CSS
-
-
 # Streamlit app
 st.title('Sales Dashboard')
 st.write('This dashboard visualizes monthly sales data.')
